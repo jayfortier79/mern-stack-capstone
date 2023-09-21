@@ -20,6 +20,9 @@ app.use(express.json());
 // app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')));
 app.use(express.static(path.join(__dirname, 'dist')));
 
+// checkToken Middleware. (Sets the req.user & req.exp properties on the request object)
+app.use(require('./config/checkToken.cjs'));
+
 // Put API routes here, before the "catch all" route
 app.get('/api/test', (req, res) => {
   res.send('You just hit a API route');
