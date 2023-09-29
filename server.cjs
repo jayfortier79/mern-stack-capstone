@@ -4,6 +4,8 @@ const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
 
+const apikey= process.env.REACT_APP_API_KEY
+
 // Connect to database
 require('./config/database.cjs');
 
@@ -22,6 +24,8 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 // checkToken Middleware. (Sets the req.user & req.exp properties on the request object)
 app.use(require('./config/checkToken.cjs'));
+
+
 
 // Put API routes here, before the "catch all" route
 app.get('/api/test', (req, res) => {
