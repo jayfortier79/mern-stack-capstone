@@ -4,8 +4,6 @@ const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
 
-const apikey= process.env.REACT_APP_API_KEY
-
 // Connect to database
 require('./config/database.cjs');
 
@@ -24,6 +22,17 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 // checkToken Middleware. (Sets the req.user & req.exp properties on the request object)
 app.use(require('./config/checkToken.cjs'));
+
+app.all('*', function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', 'https://api.api-ninjas.com/v1/caloriesburnedactivities', 'http://localhost:5173');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type', 'Field-Headers');
+  if ('OPTIONS' == req.method) {
+  res.sendStatus(200);
+  } else {
+    next();
+  }
+});
 
 
 
