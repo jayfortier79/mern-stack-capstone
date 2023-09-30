@@ -30,7 +30,7 @@ const findData = useCallback(() => {
 
 useEffect(() => {
 findData();
-}, [findData]);
+}, []);
 
 const refetch = () => {
     findData();

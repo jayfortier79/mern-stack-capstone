@@ -23,16 +23,37 @@ app.use(express.static(path.join(__dirname, 'dist')));
 // checkToken Middleware. (Sets the req.user & req.exp properties on the request object)
 app.use(require('./config/checkToken.cjs'));
 
+const cors = require('cors');
+const corsOptions ={
+    origin:'http://localhost:5173', 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200
+}
+app.use(cors(corsOptions));
+
 app.all('*', function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', 'https://api.api-ninjas.com/v1/caloriesburnedactivities', 'http://localhost:5173');
+  res.header('Access-Control-Allow-Origin', 'http://localhost:5173');
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type', 'Field-Headers');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, headers');
   if ('OPTIONS' == req.method) {
   res.sendStatus(200);
   } else {
     next();
   }
 });
+
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173/');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, headers');
+  
+  if (req.method === 'OPTIONS') {
+    res.sendStatus(200);
+  } else {
+    next();
+  }
+});
+
 
 
 
@@ -51,6 +72,15 @@ app.use('/api/users', userRouter);
 // Send the built and compiled React code to the browser
 app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
+
+
+app.options('/.*', (req, res) => {
+  // Handle the OPTIONS request
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, headers');
+  res.sendStatus(200);
 });
 
 const PORT = process.env.PORT || 3001;

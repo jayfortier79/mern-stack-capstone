@@ -3,10 +3,15 @@ import React, {useEffect} from 'react';
 
 const apikey= import.meta.env.VITE_REACT_APP_API_KEY;
 
+
+
+
 function NewOrderPage() {
-  const { records, loading, error, refetch } = FetchData('https://api.api-ninjas.com/v1/caloriesburnedactivities', {
-    headers: { 'X-Api-Key': apikey }
-  });
+  const url = 'https://jsonplaceholder.typicode.com/albums'
+  const headers = { 'X-Api-Key': apikey};
+  const params = { param1: 'cardio', param2: 'abdominals' };
+
+  const { records, loading, error, refetch } = FetchData(url, headers, params);
 
   
 
@@ -14,7 +19,7 @@ function NewOrderPage() {
 
   useEffect(() => {
     refetch();
-  }, [refetch]);
+  }, []);
 
   if (loading) {
     return <div>LOADING...</div>;
@@ -27,7 +32,7 @@ function NewOrderPage() {
   return (
     <div>
       <h1>Newness</h1>
-      {records?.map((record, index) => (
+      {Array.isArray(records) && records.map((record, index) => (
         <div key={index}>
           <h2>Record {index + 1}</h2>
           <ul>
