@@ -7,7 +7,7 @@ import axios from 'axios';
 const apikey= import.meta.env.VITE_REACT_APP_API_KEY;
 console.log(apikey)
 
-function FetchData(url, headers, params) {
+function FetchData(url, options = {}) {
 const [records, setRecords] = useState(null);
 const [loading, setLoading] = useState(false);
 const [error, setError] = useState(null);
@@ -15,7 +15,15 @@ const [error, setError] = useState(null);
 const findData = useCallback(() => {
     setLoading(true);
          axios
-        .get(url, {headers, params})
+        .get(url, {
+            headers: {
+            'X-Api-Key': apikey,
+            ...options.headers,   
+            }, 
+            params: {
+            ...options.params,
+            },
+        })
         .then((response) => {
             setRecords(response.data);
         })
@@ -26,7 +34,7 @@ const findData = useCallback(() => {
             setLoading(false);
         });
 
-}, [url, headers, params]);
+}, [url, options.headers, options.params]);
 
 useEffect(() => {
 findData();

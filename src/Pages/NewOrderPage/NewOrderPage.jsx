@@ -7,11 +7,15 @@ const apikey= import.meta.env.VITE_REACT_APP_API_KEY;
 
 
 function NewOrderPage() {
-  const url = 'https://jsonplaceholder.typicode.com/albums'
+  const baseUrl = 'https://api.api-ninjas.com/v1/exercises'
   const headers = { 'X-Api-Key': apikey};
-  const params = { param1: 'cardio', param2: 'abdominals' };
+  const params = new URLSearchParams();
+  params.append('muscle', 'biceps');
+  params.append('difficulty', 'beginner');
+  const queryString = params.toString();
+  const url = `${baseUrl}?${queryString}`;
 
-  const { records, loading, error, refetch } = FetchData(url, headers, params);
+  const { records, loading, error, refetch } = FetchData(url, headers,);
 
   
 
