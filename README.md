@@ -1,8 +1,10 @@
-The project must include a README.mdfile with the following sections:
+THE FITNESS APP:
 
 Introduction: 
 This is a fitness app that pulls data from 4 different API s in order to provide exercise information and nutrition information to fitness enthusiests. A breaktime cocktail recipe app is included for fun.
 
+
+Trello: https://trello.com/b/ygHQpuY5
 
 
 ![Alt text](home.jpg)
