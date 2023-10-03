@@ -32,6 +32,8 @@ code {
 }
 
 #root {
+  background-image: url('./assets/hans1.jpg');
+  background-size: cover;
   height: 100%;
 }
 
