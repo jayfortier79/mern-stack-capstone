@@ -7,18 +7,17 @@ const apikey= import.meta.env.VITE_REACT_APP_API_KEY;
 
 
 
-function OrderHistoryPage() {
-  const baseUrl = 'https://api.api-ninjas.com/v1/caloriesburned';
+function CocktailPage() {
+  const baseUrl = 'https://api.api-ninjas.com/v1/cocktail';
   const headers = { 'X-Api-Key': apikey};
-  const [activity, setActivity] = useState('initialValue')
+  const [name, setName] = useState()
   const {records, loading, error, refetch} = FetchData(makeUrl(), {headers});
-
 
 
 
   const handleSubmit = async () => {
     try {
-      refetch();
+        refetch();
     }catch (err) {
     console.error(err);
     } 
@@ -32,43 +31,39 @@ function OrderHistoryPage() {
 function makeUrl() {
   const queryParams = [];
   
-  
-      
-  if (activity !== 'all') {
-    queryParams.push(`activity=${encodeURIComponent(activity)}`);
+  if (name !== 'all') {
+    queryParams.push(`name=${encodeURIComponent(name)}`);
   }
-  
   
   const queryString = queryParams.length > 0 ? '?' + queryParams.join('&') : '';
 
 
     return baseUrl + queryString;
+    
     }
   
-
+    console.log(records);
 
   return (
-    <div id="burnedDiv">
-      <h1>CALORIES BURNED BY ACTIVITY</h1>
-      <h2>Enter Your Activity Here:</h2>
+    <div id="CocktailDiv">
+      <h1>Cocktail Recipes By Name</h1>
+      <h2>Enter The Name of A Cocktail for Recipe:</h2>
         <div>
-          <label>ACTIVITY:</label>
+          <label>Cocktail Name:</label>
           <input
             type="text"
-            onChange={(e) => setActivity(e.target.value)}
-            placeholder="Enter Activity"
-            
-           
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Enter Cocktail Name"
           />
         </div>
-    
-       {console.log(records)}
+
+       
     <button onClick={handleSubmit}>Submit</button>
     
     {loading ? (
       <div>LOADING...</div>
     ) : error ? (
-      <div>Error: {error.message}</div>
+      <div>Error: {error.message} </div>
    ) : records && records.length > 0 ? (
       <div>
     {records.map((record, index) => (
@@ -100,4 +95,4 @@ function makeUrl() {
 
 
 
-export default OrderHistoryPage
+export default CocktailPage

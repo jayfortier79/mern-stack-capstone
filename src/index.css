@@ -1,5 +1,6 @@
 /* CSS Custom Properties */
 :root {
+  
   --white: #FFFFFF;
   --tan-1: #f6fbfb;
   --tan-2: #dde3e7;
@@ -9,7 +10,6 @@
   --text-light: #968c84;
   --text-dark: #615954;
 }
-
 *, *:before, *:after {
   box-sizing: border-box;
 }

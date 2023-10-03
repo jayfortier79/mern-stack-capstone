@@ -26,7 +26,7 @@ app.use(require('./config/checkToken.cjs'));
 const cors = require('cors');
 const corsOptions ={
     origin:'http://localhost:5173', 
-    credentials:true,            //access-control-allow-credentials:true
+    credentials:true,           
     optionSuccessStatus:200
 }
 app.use(cors(corsOptions));
@@ -54,7 +54,9 @@ app.use((req, res, next) => {
   }
 });
 
-
+app.get('/caloriesburned', (req, res) => {
+  res.send('You just hit a API route');
+});
 
 
 // Put API routes here, before the "catch all" route

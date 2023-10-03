@@ -7,13 +7,11 @@ const apikey= import.meta.env.VITE_REACT_APP_API_KEY;
 
 
 
-function OrderHistoryPage() {
-  const baseUrl = 'https://api.api-ninjas.com/v1/caloriesburned';
+function NutritionPage() {
+  const baseUrl = 'https://api.api-ninjas.com/v1/nutrition';
   const headers = { 'X-Api-Key': apikey};
-  const [activity, setActivity] = useState('initialValue')
+  const [query, setQuery] = useState('')
   const {records, loading, error, refetch} = FetchData(makeUrl(), {headers});
-
-
 
 
   const handleSubmit = async () => {
@@ -34,10 +32,9 @@ function makeUrl() {
   
   
       
-  if (activity !== 'all') {
-    queryParams.push(`activity=${encodeURIComponent(activity)}`);
+  if (query !== 'all') {
+    queryParams.push(`query=${encodeURIComponent(query)}`);
   }
-  
   
   const queryString = queryParams.length > 0 ? '?' + queryParams.join('&') : '';
 
@@ -48,21 +45,19 @@ function makeUrl() {
 
 
   return (
-    <div id="burnedDiv">
-      <h1>CALORIES BURNED BY ACTIVITY</h1>
-      <h2>Enter Your Activity Here:</h2>
+    <div id="NutDiv">
+      <h1>Nutrition Information By Food Item</h1>
+      <h2>Enter A Food Item Here For More Info:</h2>
         <div>
-          <label>ACTIVITY:</label>
+          <label>QUERY:</label>
           <input
             type="text"
-            onChange={(e) => setActivity(e.target.value)}
-            placeholder="Enter Activity"
-            
-           
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Enter Food Item"
           />
         </div>
-    
-       {console.log(records)}
+
+       
     <button onClick={handleSubmit}>Submit</button>
     
     {loading ? (
@@ -100,4 +95,4 @@ function makeUrl() {
 
 
 
-export default OrderHistoryPage
+export default NutritionPage

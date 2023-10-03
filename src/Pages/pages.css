@@ -1,0 +1,46 @@
+#newDiv {
+    display: inline-block;
+    padding: .25em 0;
+    background: #FFC107;
+    color: #ffffff;
+    position: relative;
+    z-index: 1;
+}
+
+#NutDiv {
+    display: inline-block;
+    padding: .25em 0;
+    background: #FFC107;
+    color: #ffffff;
+    position: relative;
+    z-index: 1;
+}
+
+#homeDiv {
+    display: inline-block;
+    padding: .25em 0;
+    background: #FFC107;
+    color: #ffffff;
+    position: relative;
+    z-index: 1;
+}
+
+#CocktailDiv {
+    display: inline-block;
+    padding: .25em 0;
+    background: #FFC107;
+    color: #ffffff;
+    position: relative;
+    z-index: 1;
+}
+
+#burnedDiv {
+    display: inline-block;
+    padding: .25em 0;
+    background: #FFC107;
+    color: #ffffff;
+    position: relative;
+    z-index: 1;
+}
+
+

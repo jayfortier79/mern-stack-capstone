@@ -1,6 +1,6 @@
 import FetchData from "../../utilities/fetch"
 import React, {useEffect, useState} from 'react';
-
+import '../../Pages/pages.css'
 const apikey= import.meta.env.VITE_REACT_APP_API_KEY;
 
 
@@ -75,10 +75,10 @@ const availableTypes = [
 ];
 
 
-
   return (
-    <div>
+    <div id= "newDiv">
       <h1>THE EXERCISE INSTRUCTIONS</h1>
+      <h2>Search For Exercise Suggestions:</h2>
         <div>
           <label>Targeted Muscle:</label>
           <select value={muscle} onChange={(e) => setMuscle(e.target.value)}>
@@ -112,7 +112,7 @@ const availableTypes = [
           ))}
           </select>
         </div>
-
+        
     <button onClick={handleSubmit}>Submit</button>
     {loading ? (
       <div>LOADING...</div>
